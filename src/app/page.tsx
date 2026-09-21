@@ -125,15 +125,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GitHub */}
+      {/* GitHub - live stars */}
       <section className="bg-zinc-950 text-white">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-semibold">GitHub Activity</h2>
+              <p className="text-sm text-zinc-400">Stats cards cache 4 hours — live badges below update within minutes</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://img.shields.io/github/stars/noahotim/content-growth-machine?style=for-the-badge&logo=github&label=Stars%3A%20content-growth-machine" alt="stars cgm" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://img.shields.io/github/stars/noahotim/portfolio?style=for-the-badge&logo=github&label=Stars%3A%20portfolio" alt="stars portfolio" />
+            </div>
+          </div>
+          <div className="mt-8 grid md:grid-cols-2 gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=noahotim&theme=tokyonight" alt="stats" className="w-full rounded-2xl" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=noahotim&theme=tokyonight" alt="repos" className="w-full rounded-2xl" />
           </div>
+          <p className="mt-4 text-xs text-zinc-500 text-center">Summary cards: Cache-Control max-age 14400 (4h) via Vercel. Shields badges above are live from GitHub API.</p>
         </div>
       </section>
 
