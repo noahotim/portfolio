@@ -52,6 +52,39 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About - tell us about yourself with mentions */}
+      <section id="about" className="mx-auto max-w-[1080px] px-6 py-12">
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10">
+          <div className="flex items-start gap-4">
+            <img src="https://github.com/noahotim.png" alt="Noah Otim" className="h-12 w-12 rounded-2xl object-cover border border-zinc-200 dark:border-zinc-700" />
+            <div>
+              <h2 className="text-xl font-semibold tracking-tight">About me — Noah Otim</h2>
+              <p className="text-sm text-zinc-500">Software engineer • Practical systems • Uganda • Remote</p>
+            </div>
+          </div>
+          <p className="mt-6 leading-7 text-zinc-600 dark:text-zinc-400">
+            I am <a href="https://github.com/noahotim" className="font-medium text-zinc-900 dark:text-white hover:underline">@noahotim</a>, a software engineer who builds practical software and systems that solve real problems, focused on clear execution over complexity. I write for marketers, from early career to senior leaders, who want strategy and growth tactics they can use immediately without hype.
+          </p>
+          <div className="mt-6 grid md:grid-cols-3 gap-4">
+            <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 p-5 border border-zinc-100 dark:border-zinc-800">
+              <p className="text-sm font-medium">AI and automation</p><p className="mt-1 text-sm text-zinc-500 leading-6">How AI tools change work and how to apply them simply. Shipped with <a href="https://github.com/vercel" className="text-sky-600 hover:underline">@vercel</a> and <a href="https://github.com/openai" className="text-sky-600 hover:underline">@openai</a> APIs.</p>
+            </div>
+            <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 p-5 border border-zinc-100 dark:border-zinc-800">
+              <p className="text-sm font-medium">Marketing and growth</p><p className="mt-1 text-sm text-zinc-500 leading-6">Strategy, content and growth that compounds. Flagship is <a href="https://github.com/noahotim/content-growth-machine" className="text-sky-600 hover:underline">content-growth-machine</a> — daily LinkedIn system.</p>
+            </div>
+            <div className="rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 p-5 border border-zinc-100 dark:border-zinc-800">
+              <p className="text-sm font-medium">Leadership</p><p className="mt-1 text-sm text-zinc-500 leading-6">Management, hiring and culture in small teams. Collaborating with <a href="https://github.com/github" className="text-sky-600 hover:underline">@github</a> community.</p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            <span className="font-medium text-zinc-900 dark:text-white">Point of view:</span> People overcomplicate it. Good marketing and good engineering share the same principle — remove friction, focus on what works, and ship consistently. When you see my name you think practical, honest and ahead. Inspired by <a href="https://github.com/LHRUN" className="text-sky-600 hover:underline">@LHRUN</a> and the Bubble open-source community.
+          </p>
+          <p className="mt-4 text-sm text-zinc-500">
+            Mention me as <a href="https://github.com/noahotim" className="text-sky-600 hover:underline">@noahotim</a> • Organisations I build with: <a href="https://github.com/vercel" className="text-sky-600 hover:underline">@vercel</a> <a href="https://github.com/github" className="text-sky-600 hover:underline">@github</a>
+          </p>
+        </div>
+      </section>
+
       {/* Featured - flagship, now as editorial card with metric */}
       <section id="featured" className="mx-auto max-w-[1080px] px-6">
         <div className="rounded-[28px] overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)]">
