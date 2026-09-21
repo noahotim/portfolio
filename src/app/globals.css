@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fcfcfc;
+  --background: #fcfcfb;
   --foreground: #0a0a0a;
 }
 
@@ -12,22 +12,37 @@
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  scroll-behavior: smooth;
-}
-
+* { scroll-behavior: smooth; }
+html { scrollbar-gutter: stable; }
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* subtle grid pattern */
+/* grid + grain */
 .bg-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.045) 1px, transparent 0);
   background-size: 24px 24px;
 }
 .dark .bg-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
 }
+
+/* subtle hairline */
+.hairline { border-color: rgba(0,0,0,0.08); }
+.dark .hairline { border-color: rgba(255,255,255,0.08); }
+
+/* focus */
+:focus-visible { outline: 2px solid #0ea5e9; outline-offset: 2px; }
+
+/* animations */
+@keyframes fadeUp { from { opacity:0; transform: translateY(8px)} to { opacity:1; transform: translateY(0)} }
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+.animate-fadeUp { animation: fadeUp .6s ease both; }
+.animate-float { animation: floatY 6s ease-in-out infinite; }
+
+/* selection */
+::selection { background: rgba(14,165,233,0.18); }
