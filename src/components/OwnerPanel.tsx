@@ -9,6 +9,22 @@ const STORAGE_KEY = "pv_dashboard_key";
 
 type Country = { code: string; name: string; flag: string; views: number };
 type Day = { day: string; views: number; uniques: number };
+type RecentVisit = {
+  ts: string;
+  source: string;
+  path: string;
+  ref: string;
+  ip: string;
+  country: string;
+  city: string | null;
+  region: string | null;
+  org: string | null;
+  asn: number | null;
+  tz: string | null;
+  browser: string;
+  os: string;
+  device: string;
+};
 type Stats = {
   total: number;
   uniques: number;
@@ -17,6 +33,7 @@ type Stats = {
   lastCountry: string | null;
   countries: Country[];
   days: Day[];
+  recent: RecentVisit[];
   generatedAt: string;
 };
 
@@ -26,6 +43,14 @@ function flagEmoji(code: string) {
   return String.fromCodePoint(
     ...[...upper].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
   );
+}
+
+function timeAgo(iso: string) {
+  const sec = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+  if (sec < 60) return `${sec}s ago`;
+  if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
+  if (sec < 86400) return `${Math.floor(sec / 3600)}h ago`;
+  return `${Math.floor(sec / 86400)}d ago`;
 }
 
 function resolveKeyFromStorage() {
@@ -227,6 +252,107 @@ export default function OwnerPanel() {
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-zinc-200 dark:border-white/10 overflow-hidden">
+            <div className="flex items-center justify-between px-5 pt-5">
+              <h3 className="text-[12px] font-semibold tracking-wide uppercase text-zinc-500">
+                Recent activity
+              </h3>
+              <span className="text-[11px] text-zinc-400">
+                time · browser · OS · device · identity
+              </span>
+            </div>
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="text-[10px] uppercase tracking-wide text-zinc-400">
+                    <th className="text-left font-semibold px-5 py-2">When</th>
+                    <th className="text-left font-semibold px-3 py-2">Source</th>
+                    <th className="text-left font-semibold px-3 py-2">Browser</th>
+                    <th className="text-left font-semibold px-3 py-2">OS</th>
+                    <th className="text-left font-semibold px-3 py-2">Device</th>
+                    <th className="text-left font-semibold px-3 py-2">Location</th>
+                    <th className="text-left font-semibold px-3 py-2">IP</th>
+                    <th className="text-left font-semibold px-5 py-2">Network</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stats.recent.length === 0 && (
+                    <tr>
+                      <td
+                        colSpan={8}
+                        className="px-5 py-4 text-sm text-zinc-500"
+                      >
+                        No visits recorded yet.
+                      </td>
+                    </tr>
+                  )}
+                  {stats.recent.map((v, i) => {
+                    const loc = [v.city, v.region, v.country]
+                      .filter(Boolean)
+                      .join(", ");
+                    const abs = new Date(v.ts).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    });
+                    const isSite = v.source === "site";
+                    return (
+                      <tr
+                        key={`${v.ts}-${i}`}
+                        className="border-t border-zinc-200 dark:border-white/10"
+                      >
+                        <td
+                          className="px-5 py-2.5 whitespace-nowrap"
+                          title={abs}
+                        >
+                          <span className="font-medium">{timeAgo(v.ts)}</span>
+                          <span className="block text-[11px] text-zinc-400">
+                            {abs}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5 whitespace-nowrap">
+                          <span
+                            className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                              isSite
+                                ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
+                                : "bg-sky-50 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400"
+                            }`}
+                          >
+                            {isSite ? "site" : "badge"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5 whitespace-nowrap">
+                          {v.browser}
+                        </td>
+                        <td className="px-3 py-2.5 whitespace-nowrap">{v.os}</td>
+                        <td className="px-3 py-2.5 whitespace-nowrap">
+                          {v.device}
+                        </td>
+                        <td className="px-3 py-2.5 whitespace-nowrap">
+                          {flagEmoji(v.country)} {loc}
+                        </td>
+                        <td className="px-3 py-2.5 whitespace-nowrap font-mono text-[12px] text-zinc-500">
+                          {v.ip}
+                        </td>
+                        <td className="px-5 py-2.5 whitespace-nowrap text-zinc-500 max-w-[220px] truncate">
+                          {v.org || (v.asn ? `AS${v.asn}` : "Unknown")}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p className="px-5 py-3 text-[11px] text-zinc-400">
+              &quot;site&quot; = real browser on your portfolio (accurate IP,
+              browser, OS). &quot;badge&quot; = GitHub profile README load, relayed
+              through GitHub&apos;s image proxy, so details show GitHub, not the
+              viewer.
+            </p>
           </div>
         </div>
       </div>

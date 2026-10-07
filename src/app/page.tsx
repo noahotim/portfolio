@@ -1,5 +1,6 @@
 import projectsData from "@/data/projects.json";
 import OwnerPanel from "@/components/OwnerPanel";
+import VisitTracker from "@/components/VisitTracker";
 
 export default function Home() {
   return (
@@ -116,6 +117,7 @@ export default function Home() {
 
       {/* OWNER (private, only renders for the signed-in owner) */}
       <OwnerPanel />
+      <VisitTracker />
 
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-[1120px] px-6 py-10 md:py-14">
