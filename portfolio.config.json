@@ -1,0 +1,25 @@
+{
+  "username": "noahotim",
+  "topN": 6,
+  "includeForks": false,
+  "exclude": ["noahotim", "portfolio", "content-growth-machine", "github-contrib-globe-badge"],
+  "featured": [],
+  "tags": {
+    "educontrol-school-system": "TypeScript · Education",
+    "otzu-tech-solutions": "Next.js · Agency",
+    "university-faculty-data-scraper": "Python · Data",
+    "pdf-direct-editor": "JavaScript · Tools",
+    "profile-views": "Cloudflare · Analytics",
+    "anti-phishing-platform": "Python · Security",
+    "sues-deploy": "TypeScript · Elections",
+    "university-participation-system": "JavaScript · Platform",
+    "sues": "TypeScript · Elections",
+    "pag-soroti-chms": "TypeScript · Systems"
+  },
+  "descriptions": {
+    "anti-phishing-platform": "Detects and blocks phishing attempts with a simple reporting flow.",
+    "university-participation-system": "Tracks university event participation and reporting.",
+    "pag-soroti-chms": "Church management system for members, giving and events.",
+    "sues": "Campus elections portal with voter rolls and live results."
+  }
+}

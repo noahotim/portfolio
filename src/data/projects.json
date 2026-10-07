@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-10-07T08:35:47.574Z",
+  "user": {
+    "login": "noahotim",
+    "publicRepos": 17,
+    "followers": 0,
+    "totalStars": 14
+  },
+  "projects": [
+    {
+      "name": "pdf-direct-editor",
+      "description": "PDF Direct Editor by Otim Noah - direct PDF editing without Word conversion",
+      "tag": "JavaScript · Tools",
+      "url": "https://github.com/noahotim/pdf-direct-editor",
+      "homepage": null,
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-09-20T11:58:03Z",
+      "score": 55
+    },
+    {
+      "name": "educontrol-school-system",
+      "description": "EduControl - ONE SCHOOL ONE SYSTEM - Complete School Management",
+      "tag": "TypeScript · Education",
+      "url": "https://github.com/noahotim/educontrol-school-system",
+      "homepage": null,
+      "language": "HTML",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-09-18T07:23:15Z",
+      "score": 55
+    },
+    {
+      "name": "otzu-tech-solutions",
+      "description": "OTZU Tech Solutions – Your Trusted Software Development Partner. Static landing migrated from Vercel to Cloudflare Pages. Custom all-in-one business systems + Guest House Management System.",
+      "tag": "Next.js · Agency",
+      "url": "https://github.com/noahotim/otzu-tech-solutions",
+      "homepage": null,
+      "language": "HTML",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-09-11T12:24:12Z",
+      "score": 55
+    },
+    {
+      "name": "university-faculty-data-scraper",
+      "description": "A Python web scraper for collecting and organizing university faculty data (ABU & Unilorin)",
+      "tag": "Python · Data",
+      "url": "https://github.com/noahotim/university-faculty-data-scraper",
+      "homepage": null,
+      "language": "Python",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-09-09T08:27:23Z",
+      "score": 55
+    },
+    {
+      "name": "profile-views",
+      "description": "Live GitHub profile view counter with private country analytics on Cloudflare Workers + KV",
+      "tag": "Cloudflare · Analytics",
+      "url": "https://github.com/noahotim/profile-views",
+      "homepage": null,
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-10-07T08:23:02Z",
+      "score": 45
+    },
+    {
+      "name": "sues-deploy",
+      "description": "Deployable copy of the SUES Elections Portal (Vercel)",
+      "tag": "TypeScript · Elections",
+      "url": "https://github.com/noahotim/sues-deploy",
+      "homepage": null,
+      "language": "TypeScript",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "pushedAt": "2026-08-31T04:39:15Z",
+      "score": 45
+    }
+  ]
+}

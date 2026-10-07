@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "fetch-projects": "node scripts/fetch-projects.mjs",
+    "prebuild": "node scripts/fetch-projects.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

@@ -3,6 +3,8 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,6 +26,8 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
