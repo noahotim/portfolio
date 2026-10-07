@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { trackUrl } from "@/lib/detect";
 
 const API =
   process.env.NEXT_PUBLIC_PROFILE_VIEWS_API ||
@@ -24,6 +25,7 @@ type RecentVisit = {
   browser: string;
   os: string;
   device: string;
+  ua?: string;
 };
 type Stats = {
   total: number;
@@ -69,6 +71,8 @@ function resolveKeyFromStorage() {
 export default function OwnerPanel() {
   const [key, setKey] = useState<string | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
+  const [nonce, setNonce] = useState(0);
+  const [testing, setTesting] = useState(false);
 
   useEffect(() => {
     const id = window.setTimeout(() => {
@@ -108,12 +112,24 @@ export default function OwnerPanel() {
       active = false;
       window.clearInterval(timer);
     };
-  }, [key]);
+  }, [key, nonce]);
 
   const signOut = useCallback(() => {
     window.localStorage.removeItem(STORAGE_KEY);
     setKey(null);
     setStats(null);
+  }, []);
+
+  const runTest = useCallback(async () => {
+    setTesting(true);
+    try {
+      await fetch(trackUrl(API, "test"), { cache: "no-store" });
+      setNonce((n) => n + 1);
+    } catch {
+      /* ignore */
+    } finally {
+      window.setTimeout(() => setTesting(false), 1500);
+    }
   }, []);
 
   if (!key || !stats) return null;
@@ -147,6 +163,13 @@ export default function OwnerPanel() {
                 </span>
                 viewing now · updated {updated}
               </span>
+              <button
+                onClick={runTest}
+                disabled={testing}
+                className="rounded-full border border-sky-200 dark:border-sky-500/30 bg-sky-50 dark:bg-sky-500/10 px-3.5 py-1.5 text-xs font-medium text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-500/20 transition disabled:opacity-60"
+              >
+                {testing ? "Testing…" : "Test detection"}
+              </button>
               <button
                 onClick={signOut}
                 className="rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-3.5 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/10 transition"
@@ -300,6 +323,13 @@ export default function OwnerPanel() {
                       second: "2-digit",
                     });
                     const isSite = v.source === "site";
+                    const isTest = v.source === "test";
+                    const tagLabel = isSite ? "site" : isTest ? "test" : "badge";
+                    const tagClass = isSite
+                      ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
+                      : isTest
+                        ? "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"
+                        : "bg-sky-50 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400";
                     return (
                       <tr
                         key={`${v.ts}-${i}`}
@@ -316,16 +346,15 @@ export default function OwnerPanel() {
                         </td>
                         <td className="px-3 py-2.5 whitespace-nowrap">
                           <span
-                            className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold ${
-                              isSite
-                                ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
-                                : "bg-sky-50 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400"
-                            }`}
+                            className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold ${tagClass}`}
                           >
-                            {isSite ? "site" : "badge"}
+                            {tagLabel}
                           </span>
                         </td>
-                        <td className="px-3 py-2.5 whitespace-nowrap">
+                        <td
+                          className="px-3 py-2.5 whitespace-nowrap"
+                          title={v.ua || undefined}
+                        >
                           {v.browser}
                         </td>
                         <td className="px-3 py-2.5 whitespace-nowrap">{v.os}</td>
@@ -349,9 +378,12 @@ export default function OwnerPanel() {
             </div>
             <p className="px-5 py-3 text-[11px] text-zinc-400">
               &quot;site&quot; = real browser on your portfolio (accurate IP,
-              browser, OS). &quot;badge&quot; = GitHub profile README load, relayed
-              through GitHub&apos;s image proxy, so details show GitHub, not the
-              viewer.
+              browser, OS, device, read from the visitor&apos;s own browser).
+              &quot;test&quot; = rows you create with the Test detection button
+              (not counted in totals). &quot;badge&quot; = GitHub profile README
+              load, relayed through GitHub&apos;s image proxy, so those rows show
+              GitHub, not the real viewer. Your own visits while signed in are
+              skipped, so use Test detection to check your browser.
             </p>
           </div>
         </div>

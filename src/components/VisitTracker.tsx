@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { trackUrl } from "@/lib/detect";
 
 const API =
   process.env.NEXT_PUBLIC_PROFILE_VIEWS_API ||
@@ -13,13 +14,7 @@ export default function VisitTracker() {
       if (window.sessionStorage.getItem("pv_tracked")) return;
       window.sessionStorage.setItem("pv_tracked", "1");
 
-      const params = new URLSearchParams({
-        src: "site",
-        path: window.location.pathname,
-        ref: document.referrer || "",
-      });
-      const url = `${API}/api/track?${params.toString()}`;
-
+      const url = trackUrl(API, "site");
       if (typeof navigator !== "undefined" && navigator.sendBeacon) {
         navigator.sendBeacon(url);
       } else {
