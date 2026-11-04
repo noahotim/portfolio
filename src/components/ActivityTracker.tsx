@@ -7,12 +7,13 @@ const API =
   process.env.NEXT_PUBLIC_PROFILE_VIEWS_API ||
   "https://profile-views.otim-no25.workers.dev";
 
-const BEACON_MS = 12000;
+const BEACON_MS = 6000;
 
 export default function ActivityTracker() {
   useEffect(() => {
-    if (window.localStorage.getItem("pv_dashboard_key")) return;
-
+    // Owner reads are tracked too. Activity rows are ephemeral and never touch
+    // the view totals, so the fastest way to confirm the live table works is
+    // to watch your own session move through the sections.
     const started = Date.now();
     const perSection: Record<string, number> = {};
     let current: string | null = null;
@@ -20,15 +21,16 @@ export default function ActivityTracker() {
     let clicks = 0;
     let depth = 0;
 
-    const collect = () => {
-      if (current) perSection[current] = (perSection[current] || 0) + (Date.now() - currentSince) / 1000;
-      currentSince = Date.now();
-      const longest = Object.entries(perSection).sort((a, b) => b[1] - a[1])[0];
-      return longest ? longest[0] : current || "top";
+    const flush = () => {
+      if (current) {
+        perSection[current] = (perSection[current] || 0) + (Date.now() - currentSince) / 1000;
+        currentSince = Date.now();
+      }
     };
 
     const send = () => {
-      const section = collect();
+      flush();
+      const section = current || "top";
       const client = detectClient();
       const params = new URLSearchParams({
         src: "activity",

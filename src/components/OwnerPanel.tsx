@@ -295,9 +295,10 @@ export default function OwnerPanel() {
               </table>
             </div>
             <p className="px-5 py-3 text-[11px] text-zinc-400">
-              Section, dwell, clicks and scroll depth are reported by the
-              visitor&apos;s browser every 12 seconds while the tab is visible.
-              Your own visits are skipped while signed in.
+              Section, dwell, clicks and scroll depth come from the
+              visitor&apos;s browser every 6 seconds while the tab is visible.
+              Your own reads are included here so you can confirm it live —
+              activity rows never affect the view totals above.
             </p>
           </div>
 
