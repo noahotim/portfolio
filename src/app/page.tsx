@@ -27,6 +27,7 @@ export default function Home() {
             <a href="#about" className="hover:text-zinc-900 dark:hover:text-white transition font-medium">About</a>
             <a href="#featured" className="hover:text-zinc-900 dark:hover:text-white transition">Featured</a>
             <a href="#work" className="hover:text-zinc-900 dark:hover:text-white transition">Work</a>
+            <a href="#iot" className="hover:text-zinc-900 dark:hover:text-white transition">IoT</a>
             <a href="#stack" className="hover:text-zinc-900 dark:hover:text-white transition">Stack</a>
             <a href="#globe" className="hover:text-zinc-900 dark:hover:text-white transition">Globe</a>
           </nav>
@@ -39,6 +40,7 @@ export default function Home() {
                 <a href="#about" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">About</a>
                 <a href="#featured" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Featured</a>
                 <a href="#work" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Work</a>
+                <a href="#iot" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">IoT</a>
                 <a href="#stack" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Stack</a>
                 <a href="#globe" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Globe</a>
               </div>
@@ -181,9 +183,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* IOT RESEARCH */}
+      <section id="iot" className="mx-auto max-w-[1120px] px-6 py-12 md:py-14">
+        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">03 — IoT Research</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
+        <div className="mt-6 rounded-[28px] overflow-hidden bg-zinc-950 text-white border border-zinc-800 card-elevated">
+          <div className="grid lg:grid-cols-12">
+            <div className="lg:col-span-7 p-7 md:p-9">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 px-3 py-1 text-xs font-medium"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Final-year project · 2025</span>
+                <span className="text-xs text-zinc-400">BEng Electronics &amp; Computer Engineering</span>
+              </div>
+              <h2 className="mt-4 text-[26px] md:text-[30px] font-semibold tracking-tight">LoRa battery monitoring for UPS reliability.</h2>
+              <p className="mt-3 text-[15px] leading-7 text-zinc-400">An ESP32 sensor node measures UPS battery voltage, temperature and humidity, ships the readings over LoRaWAN to The Things Network, and lands them in Firebase and a Flutter app — so a failing battery at a remote site reports itself before it takes the load down.</p>
+              <ul className="mt-6 grid sm:grid-cols-2 gap-3 text-sm">
+                <li className="flex gap-2.5"><span className="mt-0.5 grid place-items-center h-5 w-5 shrink-0 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs">1</span><span className="text-zinc-400 leading-6"><span className="text-zinc-200">Sensor node</span> — ESP32 + SX1276, a voltage divider across the 12 V battery, DHT11 for temperature and humidity.</span></li>
+                <li className="flex gap-2.5"><span className="mt-0.5 grid place-items-center h-5 w-5 shrink-0 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs">2</span><span className="text-zinc-400 leading-6"><span className="text-zinc-200">Gateway</span> — Heltec Wireless Tracker (ESP32-S3 + SX1262) bridging LoRa to Wi-Fi and TTN.</span></li>
+                <li className="flex gap-2.5"><span className="mt-0.5 grid place-items-center h-5 w-5 shrink-0 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs">3</span><span className="text-zinc-400 leading-6"><span className="text-zinc-200">Pipeline</span> — TTN payload formatters, MQTT webhook, Firebase Realtime Database, threshold alerts in Flutter.</span></li>
+                <li className="flex gap-2.5"><span className="mt-0.5 grid place-items-center h-5 w-5 shrink-0 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 text-xs">4</span><span className="text-zinc-400 leading-6"><span className="text-zinc-200">Field tests</span> — 1.5 km reliable in open ground, ~500 m in built-up areas, packets intact under interference.</span></li>
+              </ul>
+              <p className="mt-6 text-xs leading-5 text-zinc-500">GEC4100 research report · Department of Electronics and Computer Engineering, Soroti University · supervised by Mr. Francis Komakech. Report available on request.</p>
+            </div>
+            <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-zinc-800 bg-white/[0.03] p-7 md:p-9">
+              <div className="grid grid-cols-2 gap-5">
+                <div><div className="text-2xl font-semibold tracking-tight text-white">≤0.1 V</div><div className="mt-1 text-xs leading-5 text-zinc-400">Voltage measurement error</div></div>
+                <div><div className="text-2xl font-semibold tracking-tight text-white">1.5 km</div><div className="mt-1 text-xs leading-5 text-zinc-400">Reliable range · 3.3 km best case</div></div>
+                <div><div className="text-2xl font-semibold tracking-tight text-white">2–3 s</div><div className="mt-1 text-xs leading-5 text-zinc-400">Reading to dashboard</div></div>
+                <div><div className="text-2xl font-semibold tracking-tight text-white">6+ mo</div><div className="mt-1 text-xs leading-5 text-zinc-400">Node runtime on 9 V · 8 mA active, &lt;100 µA sleep</div></div>
+              </div>
+              <div className="mt-7 pt-6 border-t border-zinc-800">
+                <div className="text-[11px] tracking-[0.16em] uppercase text-zinc-500">Signal path</div>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-medium">
+                  {["ESP32 + SX1276","LoRa PHY","Heltec gateway","TTN","Firebase","Flutter"].map((step, i) => (
+                    <span key={step} className="inline-flex items-center gap-2">
+                      <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-zinc-300">{step}</span>
+                      {i < 5 && <span className="text-zinc-600" aria-hidden>→</span>}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WORK */}
       <section id="work" className="mx-auto max-w-[1120px] px-6 py-12 md:py-14">
-        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">03 — Selected Work</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
+        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">04 — Selected Work</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
         <div className="mt-6 flex items-end justify-between gap-4"><div><h2 className="text-xl font-semibold tracking-tight">More systems I have shipped.</h2><p className="mt-1 text-sm text-zinc-500">Auto-ranked from my GitHub and refreshed daily. Production code, not demos.</p></div><a href="https://github.com/noahotim" className="hidden md:inline-flex text-sm font-medium text-sky-600 hover:underline">All repositories →</a></div>
         <div className="mt-6 grid md:grid-cols-3 gap-5">
           {projectsData.projects.map((p) => (
@@ -195,23 +240,23 @@ export default function Home() {
       {/* STACK */}
       <section id="stack" className="border-y border-zinc-200 dark:border-white/10 bg-white dark:bg-white/[0.02]">
         <div className="mx-auto max-w-[1120px] px-6 py-10">
-          <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">04 — Stack</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
+          <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">05 — Stack</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3"><h2 className="text-sm font-semibold tracking-tight">Stack I use daily</h2><span className="text-xs text-zinc-400">Core · Systems · Tooling</span></div>
           <div className="mt-5 flex flex-wrap gap-2">
-            {["TypeScript","JavaScript","Node.js","Next.js","React","Tailwind","Python","Docker","Git","GitHub","Vercel","Figma"].map((s)=>(
+            {["TypeScript","JavaScript","Node.js","Next.js","React","Tailwind","Python","C/C++","ESP32","LoRaWAN","Docker","Git","GitHub","Vercel","Figma"].map((s)=>(
               <span key={s} className="rounded-full border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-3.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300">{s}</span>
             ))}
           </div>
           <div className="mt-6 flex justify-center opacity-90">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://skillicons.dev/icons?i=ts,js,nodejs,nextjs,react,tailwind,python,docker,git,github,vercel,figma&perline=6" alt="stack icons" className="max-w-full hidden sm:block" loading="lazy" />
+            <img src="https://skillicons.dev/icons?i=ts,js,nodejs,nextjs,react,tailwind,python,c,cpp,arduino,raspberrypi,docker,git,github,vercel&perline=8" alt="stack icons" className="max-w-full hidden sm:block" loading="lazy" />
           </div>
         </div>
       </section>
 
       {/* CONTRIBUTION GLOBE */}
       <section id="globe" className="mx-auto max-w-[1120px] px-6 py-12 md:py-14">
-        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">05 — Contribution Globe</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
+        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">06 — Contribution Globe</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-semibold tracking-tight">Where the work happens.</h2>
