@@ -8,7 +8,7 @@ const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], sty
 
 export const metadata: Metadata = {
   title: "Noah Otim -- Software Engineer",
-  description: "Noah Otim builds practical software and systems that solve real problems. AI and automation, marketing and growth, leadership for small teams.",
+  description: "Noah Otim is a software engineer building web systems, automation and electronics — embedded sensors, firmware and dashboards that turn signals into decisions.",
   keywords: ["Noah Otim","Software Engineer","Portfolio","Next.js","AI","Marketing","Uganda"],
   authors: [{ name: "Noah Otim", url: "https://github.com/noahotim" }],
   metadataBase: new URL("https://noahotim.github.io"),
