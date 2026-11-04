@@ -1,6 +1,8 @@
 import projectsData from "@/data/projects.json";
 import OwnerPanel from "@/components/OwnerPanel";
 import VisitTracker from "@/components/VisitTracker";
+import ActivityTracker from "@/components/ActivityTracker";
+import ContributionGlobe from "@/components/ContributionGlobe";
 
 export default function Home() {
   return (
@@ -26,6 +28,7 @@ export default function Home() {
             <a href="#featured" className="hover:text-zinc-900 dark:hover:text-white transition">Featured</a>
             <a href="#work" className="hover:text-zinc-900 dark:hover:text-white transition">Work</a>
             <a href="#stack" className="hover:text-zinc-900 dark:hover:text-white transition">Stack</a>
+            <a href="#globe" className="hover:text-zinc-900 dark:hover:text-white transition">Globe</a>
           </nav>
           <div className="flex items-center gap-2">
             <a href="https://github.com/noahotim/content-growth-machine" className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-sky-600 text-white px-4 py-2 text-xs font-medium hover:bg-sky-700 shadow-sm transition">Content Growth Machine <span aria-hidden>&#8599;</span></a>
@@ -37,6 +40,7 @@ export default function Home() {
                 <a href="#featured" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Featured</a>
                 <a href="#work" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Work</a>
                 <a href="#stack" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Stack</a>
+                <a href="#globe" className="block px-3 py-2.5 rounded-xl hover:bg-zinc-50 dark:hover:bg-white/5 text-sm">Globe</a>
               </div>
             </details>
           </div>
@@ -118,6 +122,7 @@ export default function Home() {
       {/* OWNER (private, only renders for the signed-in owner) */}
       <OwnerPanel />
       <VisitTracker />
+      <ActivityTracker />
 
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-[1120px] px-6 py-10 md:py-14">
@@ -203,6 +208,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CONTRIBUTION GLOBE */}
+      <section id="globe" className="mx-auto max-w-[1120px] px-6 py-12 md:py-14">
+        <div className="flex items-center gap-3"><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /><span className="text-[11px] tracking-[0.16em] uppercase text-zinc-400">05 — Contribution Globe</span><span className="h-px flex-1 bg-zinc-200 dark:bg-white/10 hidden sm:block" /></div>
+        <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight">Where the work happens.</h2>
+            <p className="mt-1 text-sm text-zinc-500">Every commit I author, mapped. Refreshed daily from the GitHub API.</p>
+          </div>
+          <a href="https://github.com/noahotim/github-contrib-globe-badge" className="hidden md:inline-flex text-sm font-medium text-sky-600 hover:underline">How it is built →</a>
+        </div>
+        <div className="mt-6">
+          <ContributionGlobe />
+        </div>
+      </section>
+
       {/* GITHUB */}
       <section className="bg-zinc-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
@@ -234,7 +254,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-[1120px] px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500"><p>© 2026 Noah Otim · <a href="https://github.com/noahotim/content-growth-machine" className="font-medium text-zinc-900 dark:text-white hover:underline">Content Growth Machine</a> is the flagship</p><p className="flex gap-5"><a href="https://github.com/noahotim/portfolio" className="hover:text-zinc-900 dark:hover:text-white">Source</a><a href="https://github.com/noahotim" className="hover:text-zinc-900 dark:hover:text-white">GitHub</a></p></div>
+        <div className="mx-auto max-w-[1120px] px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500"><p>© 2026 Noah Otim · <a href="https://github.com/noahotim/content-growth-machine" className="font-medium text-zinc-900 dark:text-white hover:underline">Content Growth Machine</a> is the flagship</p><p className="flex gap-5"><span className="text-zinc-400" title="Anonymous page views and reading activity — no cookies, no third-party trackers">Analytics: first-party, anonymous</span><a href="https://github.com/noahotim/portfolio" className="hover:text-zinc-900 dark:hover:text-white">Source</a><a href="https://github.com/noahotim" className="hover:text-zinc-900 dark:hover:text-white">GitHub</a></p></div>
       </footer>
     </div>
   );

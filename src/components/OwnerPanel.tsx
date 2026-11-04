@@ -27,6 +27,19 @@ type RecentVisit = {
   device: string;
   ua?: string;
 };
+type ActiveVisit = {
+  ts: string;
+  section: string;
+  dwell: number;
+  clicks: number;
+  depth: number;
+  country: string;
+  city: string | null;
+  browser: string;
+  os: string;
+  device: string;
+};
+type SectionCount = { section: string; visitors: number };
 type Stats = {
   total: number;
   uniques: number;
@@ -36,6 +49,8 @@ type Stats = {
   countries: Country[];
   days: Day[];
   recent: RecentVisit[];
+  active: ActiveVisit[];
+  sections: SectionCount[];
   generatedAt: string;
 };
 
@@ -53,6 +68,13 @@ function timeAgo(iso: string) {
   if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
   if (sec < 86400) return `${Math.floor(sec / 3600)}h ago`;
   return `${Math.floor(sec / 86400)}d ago`;
+}
+
+function duration(seconds: number) {
+  if (seconds < 60) return `${seconds}s`;
+  const m = Math.floor(seconds / 60);
+  if (m < 60) return `${m}m ${seconds % 60}s`;
+  return `${Math.floor(m / 60)}h ${m % 60}m`;
 }
 
 function resolveKeyFromStorage() {
@@ -202,6 +224,81 @@ export default function OwnerPanel() {
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-zinc-200 dark:border-white/10 overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-5 pt-5">
+              <h3 className="text-[12px] font-semibold tracking-wide uppercase text-zinc-500">
+                Live activity · last 10 min
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {(stats.sections ?? []).slice(0, 6).map((s) => (
+                  <span
+                    key={s.section}
+                    className="rounded-full bg-sky-50 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-500/20 px-2.5 py-0.5 text-[11px] text-sky-700 dark:text-sky-300"
+                  >
+                    {s.section} · {s.visitors}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="text-[10px] uppercase tracking-wide text-zinc-400">
+                    <th className="text-left font-semibold px-5 py-2">Seen</th>
+                    <th className="text-left font-semibold px-3 py-2">Reading</th>
+                    <th className="text-left font-semibold px-3 py-2">Dwell</th>
+                    <th className="text-left font-semibold px-3 py-2">Clicks</th>
+                    <th className="text-left font-semibold px-3 py-2">Depth</th>
+                    <th className="text-left font-semibold px-3 py-2">Where</th>
+                    <th className="text-left font-semibold px-5 py-2">Client</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(stats.active ?? []).length === 0 && (
+                    <tr>
+                      <td colSpan={7} className="px-5 py-4 text-sm text-zinc-500">
+                        No viewers in the last 10 minutes.
+                      </td>
+                    </tr>
+                  )}
+                  {(stats.active ?? []).slice(0, 12).map((v, i) => (
+                    <tr
+                      key={`${v.ts}-${i}`}
+                      className="border-t border-zinc-200 dark:border-white/10"
+                    >
+                      <td className="px-5 py-2.5 whitespace-nowrap text-zinc-500">
+                        {timeAgo(v.ts)}
+                      </td>
+                      <td className="px-3 py-2.5 whitespace-nowrap font-medium">
+                        {v.section}
+                      </td>
+                      <td className="px-3 py-2.5 whitespace-nowrap tabular-nums">
+                        {duration(v.dwell)}
+                      </td>
+                      <td className="px-3 py-2.5 whitespace-nowrap tabular-nums">
+                        {v.clicks}
+                      </td>
+                      <td className="px-3 py-2.5 whitespace-nowrap tabular-nums">
+                        {v.depth}%
+                      </td>
+                      <td className="px-3 py-2.5 whitespace-nowrap">
+                        {flagEmoji(v.country)} {v.city || v.country}
+                      </td>
+                      <td className="px-5 py-2.5 whitespace-nowrap text-zinc-500">
+                        {v.browser} · {v.os} · {v.device}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="px-5 py-3 text-[11px] text-zinc-400">
+              Section, dwell, clicks and scroll depth are reported by the
+              visitor&apos;s browser every 12 seconds while the tab is visible.
+              Your own visits are skipped while signed in.
+            </p>
           </div>
 
           <div className="mt-6 grid lg:grid-cols-2 gap-5">
