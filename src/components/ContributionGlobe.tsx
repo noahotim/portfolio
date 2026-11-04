@@ -10,7 +10,7 @@ const API =
   "https://profile-views.otim-no25.workers.dev";
 const STORAGE_KEY = "pv_dashboard_key";
 
-type Repo = { name: string; url: string };
+type Repo = { name: string; url: string; commits?: number };
 type Marker = {
   owner: string;
   commits: number;
@@ -185,6 +185,11 @@ export default function ContributionGlobe() {
   }, [active, data]);
 
   const total = data.totalCommits + data.totalPullRequests;
+  const workRepos = data.markers
+    .flatMap((m) => m.repositories)
+    .sort((a, b) => (b.commits ?? 0) - (a.commits ?? 0));
+  const shownRepos = workRepos.slice(0, 8);
+  const peakCommits = Math.max(1, ...shownRepos.map((r) => r.commits ?? 0));
   const updated = new Date(data.generatedAt).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",
@@ -248,28 +253,59 @@ export default function ContributionGlobe() {
                           style={{ width: `${Math.max(4, share)}%` }}
                         />
                       </div>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {m.repositories.slice(0, 4).map((repo) => (
-                          <a
-                            key={repo.url}
-                            href={repo.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-2.5 py-1 text-[11px] text-zinc-600 dark:text-zinc-300 hover:border-sky-300 hover:text-sky-600 transition"
-                          >
-                            {repo.name}
-                          </a>
-                        ))}
-                        {m.repositories.length > 4 && (
-                          <span className="px-2.5 py-1 text-[11px] text-zinc-400">
-                            +{m.repositories.length - 4} more
-                          </span>
-                        )}
+                      <div className="mt-2 text-[11px] text-zinc-400">
+                        {m.repositories.length} repositories · {m.commits.toLocaleString("en-GB")} commits
                       </div>
                     </li>
                   );
                 })}
           </ul>
+
+          {shownRepos.length > 0 && (
+            <div className="mt-5 border-t border-zinc-100 dark:border-white/10 pt-4">
+              <div className="flex items-baseline justify-between gap-3">
+                <h4 className="text-[13px] font-semibold tracking-tight">Work behind these pins</h4>
+                <span className="text-[11px] text-zinc-400">commits per repo</span>
+              </div>
+              <ul className="mt-3 space-y-2.5">
+                {shownRepos.map((repo) => (
+                  <li key={repo.url}>
+                    <a
+                      href={repo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block"
+                    >
+                      <div className="flex items-center justify-between gap-3 text-xs">
+                        <span className="truncate font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-sky-600 transition">
+                          {repo.name}
+                        </span>
+                        <span className="shrink-0 tabular-nums text-zinc-500">
+                          {(repo.commits ?? 0).toLocaleString("en-GB")}
+                        </span>
+                      </div>
+                      <div className="mt-1 h-1 rounded-full bg-zinc-100 dark:bg-white/10 overflow-hidden">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-sky-500/70 to-violet-500/70"
+                          style={{ width: `${Math.max(3, ((repo.commits ?? 0) / peakCommits) * 100)}%` }}
+                        />
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-zinc-400">
+                <span>
+                  {workRepos.length > shownRepos.length
+                    ? `+${workRepos.length - shownRepos.length} more repositories`
+                    : `${workRepos.length} repositories`}
+                </span>
+                <a href="#work" className="font-medium text-sky-600 hover:underline">
+                  See the work →
+                </a>
+              </div>
+            </div>
+          )}
         </div>
 
         {isOwner && (active.length > 0 || sections.length > 0) && (
