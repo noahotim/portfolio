@@ -137,6 +137,7 @@ export default function Home() {
           <div className="lg:col-span-7 rounded-[24px] border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 p-7 md:p-8 card-elevated">
             <p className="text-[15px] leading-7 text-zinc-600 dark:text-zinc-400">I am a software engineer who builds systems end to end — web apps, automation, and the electronics that feed them data. Microcontrollers, sensors and serial buses on one side; interfaces and dashboards on the other. Clear execution over complexity, every time.</p>
             <p className="mt-4 text-[15px] leading-7 text-zinc-600 dark:text-zinc-400">A sensor reading only matters once it reaches a screen and a decision. Good software, good hardware and good marketing share the same rule: remove friction, focus on what works, and ship consistently. When you see my name you think <span className="font-medium text-zinc-900 dark:text-white">practical, honest and ahead.</span></p>
+            <p className="mt-4 text-[15px] leading-7 text-zinc-600 dark:text-zinc-400">I studied Electronics and Computer Engineering at Soroti University, where my final-year project put an ESP32 node on a UPS battery and sent its readings 1.5 km over LoRa. That is the loop I like: schematic, firmware, dashboard.</p>
             <div className="mt-6 flex flex-wrap gap-2"><span className="rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-3 py-1 text-xs font-medium">Practical builder</span><span className="rounded-full border border-zinc-200 dark:border-white/10 px-3 py-1 text-xs">Embedded systems</span><span className="rounded-full border border-zinc-200 dark:border-white/10 px-3 py-1 text-xs">Plain language</span><span className="rounded-full border border-zinc-200 dark:border-white/10 px-3 py-1 text-xs">Ships daily</span></div>
             <div className="mt-6 relative rounded-2xl bg-zinc-50 dark:bg-white/[0.04] border border-zinc-200 dark:border-white/10 p-5 pl-7 overflow-hidden"><span className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sky-500 to-violet-500" /><p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300 italic" style={{fontFamily: "var(--font-fraunces)"}}>“People overcomplicate it. The answer is simpler than you think.”</p></div>
           </div>
@@ -212,13 +213,8 @@ export default function Home() {
               </div>
               <div className="mt-7 pt-6 border-t border-zinc-800">
                 <div className="text-[11px] tracking-[0.16em] uppercase text-zinc-500">Signal path</div>
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-medium">
-                  {["ESP32 + SX1276","LoRa PHY","Heltec gateway","TTN","Firebase","Flutter"].map((step, i) => (
-                    <span key={step} className="inline-flex items-center gap-2">
-                      <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-zinc-300">{step}</span>
-                      {i < 5 && <span className="text-zinc-600" aria-hidden>→</span>}
-                    </span>
-                  ))}
+                <div className="mt-3 font-mono text-[11px] leading-6 text-zinc-300">
+                  {"ESP32 + SX1276 → LoRa PHY → Heltec gateway → TTN → Firebase → Flutter"}
                 </div>
               </div>
             </div>
