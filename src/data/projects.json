@@ -8,10 +8,10 @@
   },
   "projects": [
     {
-      "name": "profile-insights",
-      "description": "Live GitHub profile view counter with private country analytics on Cloudflare Workers + KV",
+      "name": "pgtht",
+      "description": "Monitors every profile visitor — sections read, dwell, clicks, country and device — on Cloudflare Workers + Durable Objects",
       "tag": "Cloudflare · Analytics",
-      "url": "https://github.com/noahotim/profile-insights",
+      "url": "https://github.com/noahotim/pgtht",
       "homepage": null,
       "language": "JavaScript",
       "stars": 1,
